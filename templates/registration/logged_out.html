@@ -1,0 +1,26 @@
+{% extends "base_site.html" %}
+
+{% block title %} Logged out {% endblock title %}
+
+{% block stylesheets %}
+  {{ block.super }}
+  <!-- Animate.css -->
+  <link href="/static/vendors/animate.css/animate.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block body_class %}login{% endblock body_class %}
+
+{% block body %}
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+	<form>
+	<h1>Logged out</h1>
+	<p>You have been successfully logged out.</p> 
+	<p>You can <a class="btn btn-default submit" href="{% url 'login' %}">log-in</a> again.</p>
+	</form>
+	</section><!--login_content-->
+      </div><!--animate form login_form-->
+    </div><!--login_wrapper-->
+{% endblock body %}
+
