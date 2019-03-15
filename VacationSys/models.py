@@ -26,7 +26,7 @@ class typeofvacation(models.Model):
     """
     idVacation = models.IntegerField(primary_key=True)
     holiType = models.CharField(max_length=10, verbose_name="请假类型")
-    marryOrNot = models.NullBooleanField(verbose_name="婚否")
+    married = models.NullBooleanField(verbose_name="婚否")
     sepWithCouple = models.NullBooleanField(verbose_name="两地分居")
     sepWithParent = models.NullBooleanField(verbose_name="与父母异地")
     serMeet10 = models.NullBooleanField(verbose_name="服役满10年")
@@ -88,8 +88,9 @@ class tableofinfo(models.Model):
     def update_or_create(person, holiType=typeofvacation.objects.get(idVacation=11), **kwargs):
         """
         基本情况表、配偶情况表、社会关系情况表发生变化（增加或者删除对象）时，执行此方法。
-            当表中存在对象时，执行更新操作；
-            当表中不存在对象时，执行创建操作。
+        功能：当表中存在对象时，执行更新操作；
+              当表中不存在对象时，执行创建操作。
+        输入：必选参数 person 为基本情况表中的对象；holiType字段有默认参数；其他字段选填。
         """
         try:
             """
@@ -97,6 +98,9 @@ class tableofinfo(models.Model):
             """
             obj = tableofinfo.objects.get(person=person)
             # sp_ids = F_配偶情况.objects.all().values('身份号')
+            # married = obj.person.身份号 in spouse_ids
+            # import datetime
+            # serMeet20 = (datetime.date.today().year - obj.person.入伍时间.year) >= 20
         except tableofinfo.DoesNotExist:
             """
             create informantion in the table
